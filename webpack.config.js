@@ -5,9 +5,12 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: [path.join(__dirname, 'dist'), path.join(__dirname, 'assets')],
+    contentBasePublicPath: ['/', '/assets'],
+    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -18,7 +21,7 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             plugins: [
-              ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }],
+              ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: false }],
               ['@babel/plugin-proposal-class-properties']
             ]
           }
