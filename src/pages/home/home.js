@@ -1,6 +1,6 @@
 import { css, LitElement, html } from 'lit-element'
 
-export default class NavBar extends LitElement {
+export default class HomePage extends LitElement {
   static get styles () {
     return styles
   }
@@ -17,4 +17,4 @@ export default class NavBar extends LitElement {
 const styles = css`
 `
 
-window.customElements.define('app-home', NavBar)
+window.customElements.define('app-home', HomePage)

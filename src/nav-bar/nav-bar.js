@@ -32,6 +32,16 @@ const styles = css`
     margin: 0 5px;
     cursor: pointer;
   }
+
+  a {
+    font-size: 1.2em;
+    color: white;
+    text-decoration: none;
+  }
+
+  a:hover, a:focus {
+    text-decoration: white underline;
+  }
 `
 
 window.customElements.define('nav-bar', NavBar)

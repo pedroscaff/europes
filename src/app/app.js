@@ -4,10 +4,11 @@ import '../nav-bar/nav-bar'
 
 const navBarItems = [
   { name: 'Home', href: '/' },
-  { name: 'Latest', href: '/latest' },
-  { name: 'GOTM', href: '/gotm' },
-  { name: 'Awards', href: '/awards' },
-  { name: 'Squads', href: '/squads' }
+  { name: 'Coop', href: '/coop' }
+  // { name: 'Latest', href: '/latest' },
+  // { name: 'GOTM', href: '/gotm' },
+  // { name: 'Awards', href: '/awards' },
+  // { name: 'Squads', href: '/squads' }
 ]
 
 const routes = [
@@ -16,8 +17,12 @@ const routes = [
     component: () => import('../pages/home/home')
   },
   {
+    path: 'coop',
+    component: () => import('../pages/coop/coop')
+  },
+  {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'coop'
   }
 ]
 
@@ -52,6 +57,8 @@ const styles = css`
     width: 100%;
     height: 100%;
     background-color: #2a475e;
+    font-family: sans-serif;
+    overflow: hidden;
   }
   .header {
     width: 100%;
@@ -60,7 +67,6 @@ const styles = css`
   }
   .mainContent {
     height: 100%;
-    widht: 100%;
   }
 `
 
