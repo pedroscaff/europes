@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -31,6 +32,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.EnvironmentPlugin(['API_URL'])
+    new webpack.EnvironmentPlugin(['API_URL']),
+    new HtmlWebpackPlugin({ base: process.env.NODE_ENV == 'development'?'/':'/europes/' }),
   ],
 }
