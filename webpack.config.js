@@ -7,7 +7,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
   },
   devServer: {
     contentBase: [path.join(__dirname, 'dist'), path.join(__dirname, 'assets')],
@@ -33,6 +32,8 @@ module.exports = {
   },
   plugins: [
     new webpack.EnvironmentPlugin(['API_URL']),
-    new HtmlWebpackPlugin({ base: process.env.NODE_ENV == 'development'?'/':'/europes/' }),
+    new HtmlWebpackPlugin({
+      base: process.env.NODE_ENV === 'development' ? '/' : '/europes/',
+    }),
   ],
 }

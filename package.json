@@ -26,7 +26,7 @@
     "deploy": "gh-pages -d dist",
     "lint": "standard",
     "lint:fix": "standard --fix",
-    "start": "webpack-dev-server --mode development"
+    "start": "NODE_ENV=development webpack-dev-server --mode development"
   },
   "standard": {
     "ignore": [
