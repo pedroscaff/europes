@@ -257,5 +257,6 @@ class s{constructor(e,t,r){this.__parts=[],this.template=e,this.processor=t,this
   }
   .mainContent {
     height: 100%;
+    overflow: auto;
   }
 `;window.customElements.define("app-root",J),Object(n.e)(n.d`<app-root></app-root>`,document.body)}]);

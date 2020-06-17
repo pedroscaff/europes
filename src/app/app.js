@@ -67,6 +67,7 @@ const styles = css`
   }
   .mainContent {
     height: 100%;
+    overflow: auto;
   }
 `
 
