@@ -15,9 +15,9 @@ export default class TournamentTable extends LitElement {
     return styles
   }
 
-  renderEntry(entry, position) {
+  renderEntry (entry, position) {
     return TournamentTable.apiHeadersMapping.map((header, i) => html`
-      <td>${i === 0 ? html`${position}&nbsp;` : ''}${i ===0 && position < 10 ? html`&nbsp;&nbsp;` : ''}${entry[header]}</td>
+      <td>${i === 0 ? html`${position}&nbsp;` : ''}${i === 0 && position < 10 ? html`&nbsp;&nbsp;` : ''}${entry[header]}</td>
     `)
   }
 

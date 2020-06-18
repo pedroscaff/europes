@@ -1,7 +1,7 @@
 import { css, LitElement, html, property } from 'lit-element'
 import '../../common/tournament-table'
 import '../../common/tournament-fixtures'
-import {getTournamentFixtures, getTournamentTable} from '../../api/api'
+import { getTournamentFixtures, getTournamentTable } from '../../api/api'
 
 const COOP_TOURNAMENT_ID = '1'
 
@@ -15,7 +15,7 @@ export default class CoopPage extends LitElement {
     return styles
   }
 
-  connectedCallback() {
+  connectedCallback () {
     super.connectedCallback()
 
     getTournamentTable(COOP_TOURNAMENT_ID).then(r => {
@@ -26,7 +26,7 @@ export default class CoopPage extends LitElement {
     })
   }
 
-  getNextFixtures(e) {
+  getNextFixtures (e) {
     const { next } = e.detail
     getTournamentFixtures(COOP_TOURNAMENT_ID, next).then(r => {
       this.currentRound = next

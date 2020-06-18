@@ -6,7 +6,7 @@ export default class Fixtures extends LitElement {
   @property() maxRounds = 1
   @property() currentRound = 1
 
-  static get styles() {
+  static get styles () {
     return css`
       .container {
         padding: 10px;
@@ -87,14 +87,14 @@ export default class Fixtures extends LitElement {
     `
   }
 
-  handleRoundClick(next) {
+  handleRoundClick (next) {
     if (next < 1 || next > this.maxRounds) {
       return
     }
-    this.dispatchEvent(new CustomEvent('onRoundChange', { detail: {current: this.currentRound, next } }))
+    this.dispatchEvent(new window.CustomEvent('onRoundChange', { detail: { current: this.currentRound, next } }))
   }
 
-  renderRoundSelector(currentRound) {
+  renderRoundSelector (currentRound) {
     const classesPrevious = classMap({ previous: true, roundNotAvailable: currentRound === 1 })
     const classesNext = classMap({ next: true, roundNotAvailable: currentRound === this.maxRounds })
     return html`
@@ -106,7 +106,7 @@ export default class Fixtures extends LitElement {
     `
   }
 
-  renderEntry(game) {
+  renderEntry (game) {
     return html`
       <div class="teamContainer ${game.played ? 'played' : ''}">
         <div class="team homeTeam">${game.homeTeamName}</div>
