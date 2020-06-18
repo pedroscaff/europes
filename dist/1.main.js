@@ -134,7 +134,7 @@
       .played {
         font-weight: 600;
       }
-    `}},{kind:"method",key:"handleRoundClick",value:function(e){e<1||e>this.maxRounds||this.dispatchEvent(new CustomEvent("onRoundChange",{detail:{current:this.currentRound,next:e}}))}},{kind:"method",key:"renderRoundSelector",value:function(e){const t=y({previous:!0,roundNotAvailable:1===e}),r=y({next:!0,roundNotAvailable:e===this.maxRounds});return i.c`
+    `}},{kind:"method",key:"handleRoundClick",value:function(e){e<1||e>this.maxRounds||this.dispatchEvent(new window.CustomEvent("onRoundChange",{detail:{current:this.currentRound,next:e}}))}},{kind:"method",key:"renderRoundSelector",value:function(e){const t=y({previous:!0,roundNotAvailable:1===e}),r=y({next:!0,roundNotAvailable:e===this.maxRounds});return i.c`
       <div class="roundSelectorContainer">
         <div class=${t} @click="${()=>this.handleRoundClick(this.currentRound-1)}">PREVIOUS</div>
         <div>Round ${e}</div>
