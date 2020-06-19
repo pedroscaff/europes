@@ -34,7 +34,7 @@ module.exports = {
     new webpack.EnvironmentPlugin(['API_URL']),
     new HtmlWebpackPlugin({
       title: 'Europes League',
-      base: process.env.NODE_ENV === 'development' ? '/' : '/website/'
+      base: '/'
     })
   ]
 }
