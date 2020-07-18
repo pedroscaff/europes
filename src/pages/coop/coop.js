@@ -36,21 +36,19 @@ export default class CoopPage extends LitElement {
 
   render () {
     return html`
-      <div class="container">
-        <tournament-table .entries="${this.tableEntries}"></tournament-table>
-        <tournament-fixtures
-          .entries="${this.tournamentFixtures}"
-          .currentRound="${this.currentRound}"
-          .maxRounds="${this.maxRounds}"
-          @onRoundChange="${this.getNextFixtures}"
-        ></tournament-fixtures>
-      </div>
+      <tournament-table .entries="${this.tableEntries}"></tournament-table>
+      <tournament-fixtures
+        .entries="${this.tournamentFixtures}"
+        .currentRound="${this.currentRound}"
+        .maxRounds="${this.maxRounds}"
+        @onRoundChange="${this.getNextFixtures}"
+      ></tournament-fixtures>
     `
   }
 }
 
 const styles = css`
-  .container {
+  :host {
     display: flex;
     padding: 20px;
   }
@@ -59,6 +57,11 @@ const styles = css`
   }
   tournament-fixtures {
     flex: 1;
+  }
+  @media (max-width: 900px) {
+    :host {
+      display: block;
+    }
   }
 `
 

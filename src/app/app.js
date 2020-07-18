@@ -5,11 +5,17 @@ import '../nav-bar/nav-bar'
 const navBarItems = [
   { name: 'Home', href: '/' },
   { name: 'Coop', href: '/coop' }
-  // { name: 'Latest', href: '/latest' },
   // { name: 'GOTM', href: '/gotm' },
   // { name: 'Awards', href: '/awards' },
   // { name: 'Squads', href: '/squads' }
 ]
+
+class AuthRoute extends LitElement {
+  render () {
+    return html`Auth...`
+  }
+}
+window.customElements.define('auth-route', AuthRoute)
 
 const routes = [
   {
@@ -19,6 +25,14 @@ const routes = [
   {
     path: 'coop',
     component: () => import('../pages/coop/coop')
+  },
+  {
+    path: 'upload-result',
+    component: () => import('../pages/upload-result/upload-result')
+  },
+  {
+    path: 'auth',
+    component: AuthRoute
   },
   {
     path: '**',
@@ -40,34 +54,40 @@ export class App extends LitElement {
 
   render () {
     return html`
-      <div class="root">
-        <img class="header" src="assets/main-header.jpg" alt="Europes main header"/>
-        <nav-bar .items="${navBarItems}"></nav-bar>
-        <div class="mainContent"><router-slot></router-slot></div>
-      </div>
+      <img class="header" src="assets/main-header.jpg" alt="Europes main header"/>
+      <nav-bar .items="${navBarItems}"></nav-bar>
+      <div class="mainContent"><router-slot></router-slot></div>
     `
   }
 }
 
 const styles = css`
-  .root {
+  :host {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: #2a475e;
     font-family: sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
   }
   .header {
     width: 100%;
     height: auto;
-    max-height: 350px;
+    max-height: 250px;
+  }
+  @media (max-width: 900px) {
+    // :host {
+    //   overflow-x: auto;
+    // }
+    .header {
+      visibility: hidden;
+      width: 0;
+    }
   }
   .mainContent {
-    height: 100%;
-    overflow: auto;
+    padding: 10px;
   }
 `
 

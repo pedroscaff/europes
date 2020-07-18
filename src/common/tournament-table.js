@@ -4,11 +4,11 @@ export default class TournamentTable extends LitElement {
   @property() entries = []
 
   static get headers () {
-    return ['Team', 'P', 'W', 'D', 'L', 'GP', 'GC', '+/-', 'Points']
+    return ['Points', 'P', 'W', 'D', 'L', 'GP', 'GC', '+/-']
   }
 
   static get apiHeadersMapping () {
-    return ['teamName', 'played', 'wins', 'draws', 'losses', 'gp', 'gc', 'gDiff', 'points']
+    return ['points', 'played', 'wins', 'draws', 'losses', 'gp', 'gc', 'gDiff']
   }
 
   static get styles () {
@@ -16,18 +16,22 @@ export default class TournamentTable extends LitElement {
   }
 
   renderEntry (entry, position) {
-    return TournamentTable.apiHeadersMapping.map((header, i) => html`
-      <td>${i === 0 ? html`${position}&nbsp;` : ''}${i === 0 && position < 10 ? html`&nbsp;&nbsp;` : ''}${entry[header]}</td>
+    return TournamentTable.apiHeadersMapping.map(header => html`
+      <td>${entry[header]}</td>
     `)
   }
 
   render () {
     return html`
-      <table>
+      <table class="tableNames">
         <thead class="tableHead">
-          <tr>
-            ${TournamentTable.headers.map(header => html`<th>${header}</th>`)}
-          </tr>
+          <tr><th>Team</th></tr>
+        </thead>
+        <tbody>${this.entries.map((entry, index) => html`<tr><td>${index} ${entry.teamName}</td></tr>`)}</tbody>
+      </table>
+      <table class="tablePoints">
+        <thead class="tableHead">
+          <tr> ${TournamentTable.headers.map(header => html`<th>${header}</th>`)} </tr>
         </thead>
         <tbody>
           ${this.entries.map((entry, index) => html`<tr>${this.renderEntry(entry, index + 1)}</tr>`)}
@@ -38,12 +42,31 @@ export default class TournamentTable extends LitElement {
 }
 
 const styles = css`
+  :host {
+    position: relative;
+    width: 100%;
+  }
   table {
     border-collapse: collapse;
-    width: 100%;
     color: white;
     text-align: center;
     vertical-align: middle;
+  }
+  .tableNames {
+    position: absolute;
+    left: 0;
+    width: 200px;
+  }
+  .tableNames td:first-child, .tableNames th:first-child {
+    text-align: left;
+    border-left: none;
+  }
+  .tableNames > td, th {
+    text-align: left;
+  }
+  .tablePoints {
+    position: absolute;
+    left: 200px;
   }
   .tableHead {
     border-bottom: 1px solid #c0c0c0;
@@ -62,13 +85,16 @@ const styles = css`
     padding: 0.25rem;
     border: 1px solid #ccc;
     border-right: none;
-  }
-  td:first-child, th:first-child {
-    text-align: left;
-    border-left: none;
+    width: 50px;
   }
   td:nth-child(even) {
     background-color: rgba(1, 1, 1, 0.2);
+  }
+
+  @media (max-width: 900px) {
+    :host {
+      overflow-x: scroll;
+    }
   }
 `
 

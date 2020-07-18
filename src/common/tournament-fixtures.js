@@ -1,5 +1,6 @@
 import { LitElement, html, css, property } from 'lit-element'
 import { classMap } from 'lit-html/directives/class-map'
+import { setFixtureId, DISCORD_AUTH_URL } from '../oauth2'
 
 export default class Fixtures extends LitElement {
   @property() entries = []
@@ -8,7 +9,7 @@ export default class Fixtures extends LitElement {
 
   static get styles () {
     return css`
-      .container {
+      :host {
         padding: 10px;
         width: 100%;
         color: white;
@@ -19,7 +20,7 @@ export default class Fixtures extends LitElement {
         height: 100%;
         align-items: center;
         display: flex;
-        height: 4em;
+        height: 3em;
         justify-content: center;
       }
       .team {
@@ -37,17 +38,28 @@ export default class Fixtures extends LitElement {
         text-align: right;
         justify-content: flex-end;
       }
-      .awayTeam {
-        text-align: left;
+      .awayTeam { text-align: left;
         justify-content: flex-start;
       }
       .result {
+        position: relative;
         align-items: center;
         display: flex;
         flex-grow: 2;
         height: 40px;
         justify-content: center;
         width: 30%;
+      }
+      .center {
+        text-align: center;
+      }
+      .center > p {
+        margin: 0;
+      }
+      .center > .upload {
+        margin: 0 auto;
+        font-size: 0.8em;
+        cursor: pointer;
       }
       .roundSelectorContainer {
         position: relative;
@@ -94,6 +106,11 @@ export default class Fixtures extends LitElement {
     this.dispatchEvent(new window.CustomEvent('onRoundChange', { detail: { current: this.currentRound, next } }))
   }
 
+  handleUploadClick (id) {
+    setFixtureId(id)
+    window.location.replace(DISCORD_AUTH_URL)
+  }
+
   renderRoundSelector (currentRound) {
     const classesPrevious = classMap({ previous: true, roundNotAvailable: currentRound === 1 })
     const classesNext = classMap({ next: true, roundNotAvailable: currentRound === this.maxRounds })
@@ -111,19 +128,23 @@ export default class Fixtures extends LitElement {
       <div class="teamContainer ${game.played ? 'played' : ''}">
         <div class="team homeTeam">${game.homeTeamName}</div>
         <div class="result">
-          <p>${game.played ? game.homeGoals : ''} x ${game.played ? game.awayGoals : ''}</p>
+          
+          ${game.played ? html`<p>${game.homeGoals}</p>` : html``}
+          <div class="center">
+            <p class="upload" @click="${() => this.handleUploadClick(game.id)}">${game.played ? html`` : html`Upload Result`}</p>
+            <p>x</p>
+          </div>
+          <p>${game.played ? game.awayGoals : ''}</p>
         </div>
-        <p class="team awayTeam">${game.awayTeamName}</p>
+        <div class="team awayTeam">${game.awayTeamName}</p>
       </div>
     `
   }
 
   render () {
     return html`
-      <div class="container">
-        ${this.renderRoundSelector(this.currentRound)}
-        ${this.entries.map(this.renderEntry)}
-      </div>
+      ${this.renderRoundSelector(this.currentRound)}
+      ${this.entries.map((e) => this.renderEntry(e))}
     `
   }
 }
